@@ -166,7 +166,15 @@ Test that you can apply a TPU Job.
 kubectl apply -f ./examples/v4-2x2x4/
 ```
 
+### Global Defaults (Environment Variables)
+
+Some configuration parameters are set via environment variables for the provisioner itself. These provide the default values for nodepools managed by the provisioner:
+
+*   `GKE_MAX_PODS_PER_NODE`: (Optional) The maximum number of pods that can run on a node. Defaults to `16`.
+
+    In GKE, the system default is 110. For large clusters, using the default of 110 can result in quickly exceeding the available IP space in the cluster's pod IP range. Setting a lower value is recommended for TPU-intensive workloads where each node typically only runs a single large pod.
+
 
 ### Ironwood / tpu7x support
 
-In order to support ironwood we need to have Workload Policy's attached to nodepool creation step, in order to work with the tpu-provisioner you will need Workload Policy resources in the project and region with the following syntax: `tpu-provisioner-$TPU_TOPOLOGY`, e.g. `tpu-provisioner-2x2x2` or `tpu-provisioner-8x8x16`. See the script in [./docs/ironwood-policy-bootstrap.sh](./docs/ironwood-policy-bootstrap.sh), which would need to run ahead of time in the project for each region where ironwood capacity is landing. 
+In order to support ironwood we need to have Workload Policy's attached to nodepool creation step, in order to work with the tpu-provisioner you will need Workload Policy resources in the project and region with the following syntax: `tpu-provisioner-$TPU_TOPOLOGY`, e.g. `tpu-provisioner-2x2x2` or `tpu-provisioner-8x8x16`. See the script in [./docs/ironwood-policy-bootstrap.sh](./docs/ironwood-policy-bootstrap.sh), which would need to run ahead of time in the project for each region where ironwood capacity is landing.
