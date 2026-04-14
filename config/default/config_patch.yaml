@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: manager
+data:
+  ENABLE_SLICE_CONTROLLER: "false"
+  ENABLE_WEBHOOKS: "true"
